@@ -1,28 +1,26 @@
 #include<iostream>
 #include "quicksort.h"
+#include<vector>
 
-void QuickSort::Sort(int a[], int low, int high){
-    int pivot;
-    if(low < high){
-       pivot = partition(a, low, high);
-       Sort(a, low, pivot-1);
-       Sort(a, pivot+1, high);
+void QuickSort::Sort(std::vector<int>&arr, int low, int high){
+    if(low<high){
+        int pi = partition(arr, low, high);
+        Sort(arr, low, pi-1);
+        Sort(arr, pi+1, high);
     }
+    
 }
 
-int QuickSort::partition(int a[], int low, int high){
-    int pi,temp;
-    pi = a[high];
-    int i = low - 1, j = high+1;
-
-for (j = low; j<high; j++){
-    if(a[j]<= pi){
-        i++;
-        std::swap(a[i], a[j]);
+int QuickSort::partition(std::vector<int>&arr, int low, int high){
+    int pivot = arr[high];
+    int i = low-1;
+    for(int j=low; j<high; j++){
+        if(arr[j]<pivot){
+            i++;
+            std::swap(arr[i], arr[j]);
+        }
     }
-}
- std::swap(a[i+1], a[high]);
-
+    std::swap(arr[i+1], arr[high]);
     return i+1;
-
 }
+
